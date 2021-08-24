@@ -1,0 +1,29 @@
+local FilteredWords = {"robux", " r$ ", "!" ,".", " using ", "free", " for " ,"check ", " go ", "browser", "visit", ":"," instantly"}
+local ReplaceMessage = {"7_XN Anti Bot Script Response", "Kicking Player"} --Feel free to modify :D
+
+local function ScanForWords(msg)
+	local count = 0
+	for i,v in pairs(FilteredWords) do
+		if(string.find(msg,v) ~= nil) then
+			count = count + 1
+		end
+	end
+	if (count > 3) then
+		return true
+	end
+	return false
+end
+
+local function Run(ChatService)
+	
+	local function FilterRobuxWord(sender, messageObject, channelName)
+		if(ScanForWords(string.lower(messageObject.Message))) then
+			messageObject.Message = ReplaceMessage
+			game.Players:FindFirstChild(sender):KickMessage("Kicked by 7_XN Anti Bot Script V1.1. Refrain from botting this game. Thank you.")
+		end
+	end
+	
+	ChatService:RegisterFilterMessageFunction("makeLowercase", FilterRobuxWord)
+end
+
+return Run
