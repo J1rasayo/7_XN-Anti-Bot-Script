@@ -1,0 +1,7 @@
+local CSR = game.Chat:WaitForChild("ChatServiceRunner")
+CSR.Disabled = true
+for i,v in pairs(script:GetChildren()) do
+	v.Parent = game.Chat:WaitForChild("ChatModules")
+end
+CSR.Disabled = false 
+script:Destroy()
